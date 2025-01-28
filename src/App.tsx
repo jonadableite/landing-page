@@ -27,34 +27,46 @@ import Testimonials from "./components/Testimonials";
 
 import { BrowserRouter } from "react-router-dom";
 import About from "./components/About";
+import Compliance from "./components/Compliance";
 import Footer from "./components/Footer";
+import Legal from "./components/Legal";
+import Privacy from "./components/Privacidade";
+import Security from "./components/Seguranca";
+import Terms from "./components/Termos";
 
 const App: React.FC = () => {
 	return (
 		<ReactLenis root>
-			<div className="relative isolate overflow-hidden">
+			<div className="flex flex-col min-h-screen">
 				<Header />
 				<BrowserRouter>
-					<Routes>
-						<Route
-							path="/"
-							element={
-								<main>
-									<Hero />
-									<Feature />
-									<HowItWorks />
-									<Dashboard />
-									<FlowChartChatbot />
-									<CTASection />
-									<Pricing />
-									<Testimonials />
-									<FAQ />
-								</main>
-							}
-						/>
-						<Route path="/trial-form" element={<TestGratuitoForm />} />
-						<Route path="/sobre" element={<About />} />
-					</Routes>
+					<div className="flex-grow">
+						<Routes>
+							<Route
+								path="/"
+								element={
+									<main>
+										<Hero />
+										<Feature />
+										<HowItWorks />
+										<Dashboard />
+										<FlowChartChatbot />
+										<CTASection />
+										<Pricing />
+										<Testimonials />
+										<FAQ />
+									</main>
+								}
+							/>
+							<Route path="/sobre" element={<About />} />
+							<Route path="/legal" element={<Legal />} />
+							<Route path="/privacy" element={<Privacy />} />
+							<Route path="/terms" element={<Terms />} />
+							<Route path="/security" element={<Security />} />
+							<Route path="/compliance" element={<Compliance />} />
+							<Route path="/trial-form" element={<TestGratuitoForm />} />
+						</Routes>
+					</div>
 				</BrowserRouter>
 				<Footer />
 			</div>
