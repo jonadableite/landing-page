@@ -15,6 +15,7 @@ import { ReactLenis } from "lenis/react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import { Route, Routes } from "react-router-dom";
+import CTASection from "./components/CTASection";
 import Dashboard from "./components/Dashboard";
 import Feature from "./components/Feature";
 import FlowChartChatbot from "./components/FlowChartChatbot";
@@ -39,6 +40,7 @@ const App: React.FC = () => {
 									<HowItWorks />
 									<Dashboard />
 									<FlowChartChatbot />
+									<CTASection />
 								</main>
 							}
 						/>

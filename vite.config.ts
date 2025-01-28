@@ -6,6 +6,9 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
 	plugins: [react()],
+	server: {
+		allowedHosts: ["site.whatlead.com.br"],
+	},
 	resolve: {
 		alias: {
 			"@": path.resolve(__dirname, "./src"),
