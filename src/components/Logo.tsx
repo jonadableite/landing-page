@@ -10,6 +10,7 @@ import { favicon, logo } from "@/assets";
 
 type LogoProps = {
 	variant?: "default" | "icon";
+	className?: string;
 };
 
 const Logo = ({ variant = "default" }: LogoProps) => {

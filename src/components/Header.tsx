@@ -24,7 +24,7 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
-
+import { useNavigate } from "react-router-dom";
 /**
  * Assets
  */
@@ -37,6 +37,16 @@ import { Menu } from "lucide-react";
 import { navMenu } from "@/constants";
 
 const Header = () => {
+	const navigate = useNavigate();
+
+	const handleStartTrial = () => {
+		navigate("/trial-form");
+	};
+
+	const handleLogin = () => {
+		window.location.href = "https://aquecer.whatlead.com.br/login";
+	};
+
 	return (
 		<header className="border h-16 grid grid-cols-1 items-center md:h-20 lg:h-24">
 			<div className="container flex items-center justify-between">
@@ -96,8 +106,10 @@ const Header = () => {
 
 				<div className="flex items-center space-x-2">
 					<div className="hidden lg:flex items-center space-x-2">
-						<Button variant="ghost">Login</Button>
-						<Button>Teste Grátis</Button>
+						<Button variant="ghost" onClick={handleLogin}>
+							Login
+						</Button>
+						<Button onClick={handleStartTrial}>Teste Grátis</Button>
 					</div>
 
 					<Popover>
@@ -111,7 +123,11 @@ const Header = () => {
 							align="end"
 							className="bg-background/50 backdrop-blur-3xl border-foreground/5 border-x-0 border-b-0 rounded-lg overflow-hidden"
 						>
-							<MobileMenu navMenu={navMenu} />
+							<MobileMenu
+								navMenu={navMenu}
+								onLogin={handleLogin}
+								onStartTrial={handleStartTrial}
+							/>
 						</PopoverContent>
 					</Popover>
 				</div>

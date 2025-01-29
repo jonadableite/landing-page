@@ -27,6 +27,7 @@ import { CirclePlay } from "lucide-react";
  */
 import { useRef } from "react";
 import ReactPlayer from "react-player/youtube";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Constants
@@ -73,6 +74,7 @@ const imageVariants: Variants = {
 };
 
 const Hero = () => {
+	const navigate = useNavigate();
 	const dashboardLinhaRef = useRef<HTMLElement>(null);
 
 	const { scrollYProgress } = useScroll({
@@ -87,6 +89,10 @@ const Hero = () => {
 		damping: 30,
 		restDelta: 0.001,
 	});
+
+	const handleStartTrial = () => {
+		navigate("/trial-form");
+	};
 
 	return (
 		<section className="py-10 md:py-16 overflow-hidden relative">
@@ -136,7 +142,7 @@ const Hero = () => {
 						variants={heroChildVariants}
 						className="flex justify-center gap-2 mt-6 md:mt-10"
 					>
-						<Button>Iniciar Teste Gratuito</Button>
+						<Button onClick={handleStartTrial}>Iniciar Teste Gratuito</Button>
 						<Dialog>
 							<DialogTrigger asChild>
 								<Button variant="ghost">

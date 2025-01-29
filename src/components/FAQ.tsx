@@ -171,16 +171,19 @@ const FAQ = () => {
 					<p className="text-gray-300 mb-8 text-lg">
 						Ainda tem dúvidas? Nossa equipe está pronta para ajudar!
 					</p>
-					<motion.button
+					<motion.a
+						href="https://wa.me/5512988444921"
+						target="_blank"
+						rel="noopener noreferrer"
 						whileHover={{
 							scale: 1.05,
 							boxShadow: "0 0 20px rgba(51, 17, 115, 0.3)",
 						}}
 						whileTap={{ scale: 0.95 }}
-						className="px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-primary/50 transition-all duration-300"
+						className="inline-block px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-primary/50 transition-all duration-300"
 					>
 						Fale com um Especialista
-					</motion.button>
+					</motion.a>
 				</motion.div>
 			</motion.div>
 

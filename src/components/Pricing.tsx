@@ -3,7 +3,6 @@
  * @copyright 2025 jonadab-whatlead
  *  @license Apache-2.0
  */
-
 import {
 	AnimatePresence,
 	motion,
@@ -27,49 +26,79 @@ export default function PricingPage() {
 	const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 	const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
+	const handleSubscription = (checkoutUrl: string) => {
+		console.log("Redirecionando para o checkout da Kiwify:", checkoutUrl);
+		window.location.href = checkoutUrl;
+	};
+
 	const plans = [
 		{
 			name: "Starter",
 			icon: <Zap className="w-8 h-8" />,
-			price: isYearly ? "290" : "29",
+			price: isYearly ? "R$890,00" : "R$89,00",
+			monthlyPrice: isYearly ? "R$74,17" : null,
+			description: "Ideal para iniciantes e pequenos negócios",
 			color: "from-blue-500 to-cyan-400",
 			features: [
-				"5.000 mensagens/mês",
-				"10 automações ativas",
+				"15.000 mensagens/mês",
+				"1.000 leads/mês",
+				"2 automações ativas",
 				"Suporte por email",
 				"Analytics básico",
-				"API limitada",
+				"Aquecedor básico",
 			],
+			checkoutUrl: isYearly
+				? "https://pay.kiwify.com.br/PSnL4q9"
+				: "https://pay.kiwify.com.br/aDc6RBJ",
 		},
 		{
 			name: "Pro",
 			icon: <Star className="w-8 h-8" />,
-			price: isYearly ? "890" : "89",
+			price: isYearly ? "R$1.284,00" : "R$119,00",
+			monthlyPrice: isYearly ? "R$107,00" : null,
+			description:
+				"Perfeito para usuários que precisam de mais recursos e suporte prioritário",
 			color: "from-violet-500 to-purple-500",
 			popular: true,
 			features: [
 				"50.000 mensagens/mês",
+				"5.000 leads/mês",
 				"Automações ilimitadas",
 				"Suporte prioritário",
 				"Analytics avançado",
 				"API completa",
+				"Aquecedor avançado",
 				"Integrações premium",
 			],
+			checkoutUrl: isYearly
+				? "https://pay.kiwify.com.br/rH8mcG0"
+				: "https://pay.kiwify.com.br/IFogofP",
 		},
 		{
 			name: "Enterprise",
 			icon: <Crown className="w-8 h-8" />,
-			price: isYearly ? "1990" : "199",
+			price: isYearly ? "R$1990,00" : "R$199,00",
+			monthlyPrice: isYearly ? "R$165,83" : null,
+			description:
+				"Solução completa para grandes empresas e necessidades complexas",
 			color: "from-orange-500 to-pink-500",
 			features: [
+				"Disparos ilimitados",
 				"Mensagens ilimitadas",
+				"Automações ilimitadas",
+				"Leads ilimitados",
 				"Recursos exclusivos",
 				"Suporte 24/7 VIP",
 				"Analytics personalizado",
 				"API dedicada",
 				"Setup assistido",
+				"Integrações personalizadas",
+				"Aquecedor personalizado",
 				"Treinamento da equipe",
 			],
+			checkoutUrl: isYearly
+				? "https://pay.kiwify.com.br/gfQxhOQ"
+				: "https://pay.kiwify.com.br/JrpASCM",
 		},
 	];
 
@@ -221,12 +250,24 @@ export default function PricingPage() {
 
 									<div className="flex items-baseline gap-1 mb-6">
 										<span className="text-4xl font-bold text-white">
-											R${plan.price}
+											{plan.price}
 										</span>
 										<span className="text-gray-400">
 											/{isYearly ? "ano" : "mês"}
 										</span>
 									</div>
+
+									{/* MonthlyPrice (apenas se for plano anual) */}
+									{isYearly && plan.monthlyPrice && (
+										<div className="text-sm text-green-500 mb-4">
+											Equivalente a {plan.monthlyPrice}/mês
+										</div>
+									)}
+
+									{/* Description */}
+									<p className="text-gray-500 text-sm mb-8">
+										{plan.description}
+									</p>
 
 									<ul className="space-y-4 mb-8">
 										{plan.features.map((feature, i) => (
@@ -254,13 +295,14 @@ export default function PricingPage() {
 									</ul>
 
 									<motion.button
+										onClick={() => handleSubscription(plan.checkoutUrl)}
 										whileHover={{ scale: 1.05 }}
 										whileTap={{ scale: 0.95 }}
 										className={`
-                      w-full py-4 rounded-xl font-bold text-white
-                      bg-gradient-to-r ${plan.color}
-                      group relative overflow-hidden
-                    `}
+        w-full py-4 rounded-xl font-bold text-white
+        bg-gradient-to-r ${plan.color}
+        group relative overflow-hidden
+      `}
 									>
 										<span className="relative z-10 flex items-center justify-center gap-2">
 											Começar Agora
@@ -302,10 +344,13 @@ export default function PricingPage() {
 					<p className="text-gray-400 text-lg mb-4">
 						Precisa de um plano personalizado?
 					</p>
-					<motion.button
+					<motion.a
+						href="https://wa.me/5512988444921"
+						target="_blank"
+						rel="noopener noreferrer"
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
-						className="px-8 py-4 rounded-xl text-white font-bold bg-gradient-to-r from-primary to-secondary group relative overflow-hidden"
+						className="inline-block px-8 py-4 rounded-xl text-white font-bold bg-gradient-to-r from-primary to-secondary group relative overflow-hidden"
 					>
 						<span className="relative z-10 flex items-center gap-2">
 							Falar com Especialista
@@ -317,7 +362,7 @@ export default function PricingPage() {
 							whileHover={{ x: "100%" }}
 							transition={{ duration: 0.5 }}
 						/>
-					</motion.button>
+					</motion.a>
 				</motion.div>
 			</div>
 		</div>
