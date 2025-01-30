@@ -25,6 +25,7 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { useNavigate } from "react-router-dom";
+import { scroller } from "react-scroll";
 /**
  * Assets
  */
@@ -45,6 +46,15 @@ const Header = () => {
 
 	const handleLogin = () => {
 		window.location.href = "https://aquecer.whatlead.com.br/login";
+	};
+
+	const scrollToSection = (sectionId: string) => {
+		scroller.scrollTo(sectionId, {
+			duration: 800,
+			delay: 0,
+			smooth: "easeInOutQuart",
+			offset: -70,
+		});
 	};
 
 	return (
@@ -92,7 +102,15 @@ const Header = () => {
 										</>
 									) : (
 										<NavigationMenuLink
-											href={href}
+											onSelect={(event) => {
+												event.preventDefault();
+												if (label === "Preços") {
+													scrollToSection("precos");
+												} else {
+													// Para outros links, mantenha o comportamento padrão
+													window.location.href = href;
+												}
+											}}
 											className={navigationMenuTriggerStyle()}
 										>
 											{label}
