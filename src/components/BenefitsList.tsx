@@ -1,15 +1,16 @@
 // src/components/BenefitsList.tsx
 /**
  * @copyright 2025 jonadab-whatlead
- *  @license Apache-2.0
+ * @license Apache-2.0
  */
 import { motion } from "framer-motion";
+
 
 export const BenefitsList = () => {
 	const benefits = [
 		{
 			icon: "🚀",
-			text: "Automação Inteligente",
+			text: "Uso de agentes de IA com muitos modelos disponíveis", // Changed text here
 		},
 		{
 			icon: "🛡️",
@@ -41,6 +42,7 @@ export const BenefitsList = () => {
 		},
 	];
 
+
 	return (
 		<div className="w-full overflow-hidden bg-deep-purple/10 backdrop-blur-md py-4 rounded-xl">
 			<motion.div
@@ -67,5 +69,6 @@ export const BenefitsList = () => {
 		</div>
 	);
 };
+
 
 export default BenefitsList;

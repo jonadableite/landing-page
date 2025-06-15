@@ -1,21 +1,24 @@
 // src/components/HowItWorks.tsx
 
+
 /**
  * @copyright 2025 jonadab-whatlead
  * @license Apache-2.0
  */
+
 
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { FaBolt, FaChartLine, FaRobot, FaShieldAlt } from "react-icons/fa";
 
+
 const steps = [
 	{
 		icon: FaRobot,
-		title: "Automação Inteligente",
+		title: "IA com muitos modelos disponíveis", // Changed text heres
 		description:
-			"Configure suas automações com nossa IA avançada que simula comportamento humano.",
+			"Configure suas automações com nossa IA avançada e agentes de IA.",
 		color: "from-green-400 to-primary",
 		gradient: "bg-gradient-to-r from-green-400/20 to-primary/20",
 	},
@@ -42,19 +45,23 @@ const steps = [
 	},
 ];
 
+
 const HowItWorks = () => {
 	const containerRef = useRef(null);
 	const isInView = useInView(containerRef, { margin: "-100px" });
 	const [activeStep, setActiveStep] = useState(0);
+
 
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
 		offset: ["start end", "end start"],
 	});
 
+
 	const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 	const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 	const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+
 
 	const containerVariants = {
 		hidden: { opacity: 0 },
@@ -66,10 +73,12 @@ const HowItWorks = () => {
 		},
 	};
 
+
 	const itemVariants = {
 		hidden: { opacity: 0, y: 50 },
 		visible: { opacity: 1, y: 0 },
 	};
+
 
 	return (
 		<motion.section
@@ -80,21 +89,22 @@ const HowItWorks = () => {
 		>
 			{/* Animated Background (Gradiente suave) */}
 			{/* <motion.div
-				className="absolute inset-0 z-0"
-				style={{ opacity }}
-				animate={{
-					background: [
-						"radial-gradient(circle at 20% 50%, rgba(20, 16, 51, 0.121) 0%, rgba(20, 16, 51, 0.1) 50%, transparent 70%)",
-						"radial-gradient(circle at 80% 50%, rgba(20, 16, 51, 0.208) 0%, rgba(20, 16, 51, 0.1) 50%, transparent 70%)",
-					],
-				}}
-				transition={{
-					duration: 10,
-					repeat: Number.POSITIVE_INFINITY,
-					repeatType: "reverse",
-					ease: "easeInOut",
-				}}
-			/> */}
+        className="absolute inset-0 z-0"
+        style={{ opacity }}
+        animate={{
+          background: [
+            "radial-gradient(circle at 20% 50%, rgba(20, 16, 51, 0.121) 0%, rgba(20, 16, 51, 0.1) 50%, transparent 70%)",
+            "radial-gradient(circle at 80% 50%, rgba(20, 16, 51, 0.208) 0%, rgba(20, 16, 51, 0.1) 50%, transparent 70%)",
+          ],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Number.POSITIVE_INFINITY,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        }}
+      /> */}
+
 
 			<motion.div
 				style={{ scale }}
@@ -138,6 +148,7 @@ const HowItWorks = () => {
 					</motion.p>
 				</motion.div>
 
+
 				{/* Steps Grid */}
 				<motion.div
 					variants={containerVariants}
@@ -179,6 +190,7 @@ const HowItWorks = () => {
 									<span className="text-primary font-bold">{index + 1}</span>
 								</motion.div>
 
+
 								{/* Icon */}
 								<motion.div
 									whileHover={{ rotate: 360, scale: 1.1 }}
@@ -187,6 +199,7 @@ const HowItWorks = () => {
 								>
 									<step.icon className="w-full h-full text-white" />
 								</motion.div>
+
 
 								{/* Content */}
 								<motion.h3
@@ -206,6 +219,7 @@ const HowItWorks = () => {
 									{step.description}
 								</motion.p>
 
+
 								{/* Connector */}
 								{index < steps.length - 1 && (
 									<motion.div
@@ -224,6 +238,7 @@ const HowItWorks = () => {
 								)}
 							</motion.div>
 
+
 							{/* Hover Effect */}
 							<motion.div
 								className="absolute inset-0 rounded-2xl blur-xl transition-opacity duration-300"
@@ -236,6 +251,7 @@ const HowItWorks = () => {
 					))}
 				</motion.div>
 
+
 				{/* CTA Button */}
 				<motion.div
 					variants={containerVariants}
@@ -244,6 +260,7 @@ const HowItWorks = () => {
 					className="text-center mt-20"
 				></motion.div>
 			</motion.div>
+
 
 			{/* Scroll Progress Indicator */}
 			<motion.div
@@ -256,10 +273,12 @@ const HowItWorks = () => {
 				/>
 			</motion.div>
 
+
 			{/* Gradiente para transição suave para a próxima seção */}
 			<div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-deep via-deep/80 to-transparent pointer-events-none" />
 		</motion.section>
 	);
 };
+
 
 export default HowItWorks;

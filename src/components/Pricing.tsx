@@ -66,6 +66,7 @@ export default function PricingPage() {
 			color: "from-violet-500 to-purple-500",
 			popular: true,
 			features: [
+				"2 Agentes de IA",
 				"50.000 mensagens/mês",
 				"5.000 leads/mês",
 				"Automações ilimitadas",
@@ -88,6 +89,7 @@ export default function PricingPage() {
 				"Solução completa para grandes empresas e necessidades complexas",
 			color: "from-orange-500 to-pink-500",
 			features: [
+				"Agentes ilimitados",
 				"Disparos ilimitados",
 				"Mensagens ilimitadas",
 				"Automações ilimitadas",
