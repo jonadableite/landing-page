@@ -1,10 +1,10 @@
 // src/components/Pricing.tsx
 /**
  * @copyright 2025 jonadab-whatlead
- *  @license Apache-2.0
+ * @license Apache-2.0
  */
 import {
-	AnimatePresence,
+	AnimatePresence, // Import AnimatePresence
 	motion,
 	useScroll,
 	useTransform,
@@ -35,7 +35,7 @@ export default function PricingPage() {
 		{
 			name: "Starter",
 			icon: <Zap className="w-8 h-8" />,
-			price: isYearly ? "R$890,00" : "R$89,00",
+			price: isYearly ? "R$1.299,00" : "R$129,90",
 			monthlyPrice: isYearly ? "R$74,17" : null,
 			description: "Ideal para iniciantes e pequenos negócios",
 			color: "from-blue-500 to-cyan-400",
@@ -54,7 +54,7 @@ export default function PricingPage() {
 		{
 			name: "Pro",
 			icon: <Star className="w-8 h-8" />,
-			price: isYearly ? "R$1.284,00" : "R$119,00",
+			price: isYearly ? "R$2.499,00" : "R$249,90",
 			monthlyPrice: isYearly ? "R$107,00" : null,
 			description:
 				"Perfeito para usuários que precisam de mais recursos e suporte prioritário",
@@ -77,7 +77,7 @@ export default function PricingPage() {
 		{
 			name: "Enterprise",
 			icon: <Crown className="w-8 h-8" />,
-			price: isYearly ? "R$1990,00" : "R$199,00",
+			price: isYearly ? "R$4.999,00" : "R$499,90",
 			monthlyPrice: isYearly ? "R$165,83" : null,
 			description:
 				"Solução completa para grandes empresas e necessidades complexas",
@@ -173,27 +173,47 @@ export default function PricingPage() {
 						transition={{ delay: 0.2 }}
 						className="flex items-center justify-center gap-4"
 					>
-						<span className="text-gray-400 text-lg">Mensal</span>
+						{/* Text "Mensal" with color animation */}
+						<motion.span
+							animate={{ color: isYearly ? '#9ca3af' : '#e5e7eb' }} // Animate to gray-400 or gray-100
+							className="text-lg transition-colors duration-300"
+						>
+							Mensal
+						</motion.span>
+						{/* Toggle Button */}
 						<motion.button
 							whileTap={{ scale: 0.95 }}
 							onClick={() => setIsYearly(!isYearly)}
-							className="relative w-20 h-10 rounded-full bg-gradient-to-r from-primary to-secondary p-1"
+							className="relative w-20 h-10 rounded-full bg-gradient-to-r from-primary to-secondary p-1 flex items-center" // Added flex items-center for vertical alignment
 						>
 							<motion.div
-								animate={{ x: isYearly ? 40 : 0 }}
+								animate={{ x: isYearly ? 40 : 0 }} // Move 40px to the right for yearly
+								transition={{ type: "spring", stiffness: 700, damping: 30 }} // Spring animation for smoother toggle
 								className="w-8 h-8 rounded-full bg-white shadow-lg"
 							/>
 						</motion.button>
-						<span className="text-gray-400 text-lg">Anual</span>
+						{/* Text "Anual" with color animation */}
 						<motion.span
-							animate={{
-								scale: isYearly ? [1, 1.1, 1] : 1,
-							}}
-							transition={{ duration: 0.3 }}
-							className="ml-2 inline-block px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-green-400 to-emerald-500 text-white"
+							animate={{ color: isYearly ? '#e5e7eb' : '#9ca3af' }} // Animate to gray-100 or gray-400
+							className="text-lg transition-colors duration-300"
 						>
-							Economize 20%
+							Anual
 						</motion.span>
+						{/* "Economize 20%" badge with AnimatePresence */}
+						<AnimatePresence>
+							{isYearly && (
+								<motion.span
+									key="save-badge" // Key required for AnimatePresence
+									initial={{ opacity: 0, scale: 0.8, x: -10 }} // Initial state (fade in from left, slightly smaller)
+									animate={{ opacity: 1, scale: 1, x: 0 }} // Animate to visible state
+									exit={{ opacity: 0, scale: 0.8, x: -10 }} // Animate out (fade out to left, slightly smaller)
+									transition={{ duration: 0.3 }} // Smooth transition
+									className="ml-2 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-green-400 to-emerald-500 text-white" // Use inline-flex for potential icon alignment
+								>
+									Economize 20%
+								</motion.span>
+							)}
+						</AnimatePresence>
 					</motion.div>
 				</motion.div>
 
@@ -211,10 +231,13 @@ export default function PricingPage() {
 								onHoverEnd={() => setHoveredPlan(null)}
 								className="relative group"
 							>
+								{/* Main Card Content */}
 								<motion.div
 									animate={
 										hoveredPlan === index ? { scale: 1.05 } : { scale: 1 }
 									}
+									// Added transition for scale for smoother effect
+									transition={{ duration: 0.3 }}
 									className={`
                     relative p-8 rounded-2xl
                     bg-deep-purple/30 backdrop-blur-xl
@@ -236,10 +259,10 @@ export default function PricingPage() {
 
 									<div
 										className={`
-                    w-16 h-16 rounded-xl mb-6
-                    flex items-center justify-center
-                    bg-gradient-to-r ${plan.color}
-                  `}
+                      w-16 h-16 rounded-xl mb-6
+                      flex items-center justify-center
+                      bg-gradient-to-r ${plan.color}
+                    `}
 									>
 										{plan.icon}
 									</div>
@@ -299,10 +322,10 @@ export default function PricingPage() {
 										whileHover={{ scale: 1.05 }}
 										whileTap={{ scale: 0.95 }}
 										className={`
-        w-full py-4 rounded-xl font-bold text-white
-        bg-gradient-to-r ${plan.color}
-        group relative overflow-hidden
-      `}
+                      w-full py-4 rounded-xl font-bold text-white
+                      bg-gradient-to-r ${plan.color}
+                      group relative overflow-hidden
+                    `}
 									>
 										<span className="relative z-10 flex items-center justify-center gap-2">
 											Começar Agora
@@ -317,15 +340,18 @@ export default function PricingPage() {
 									</motion.button>
 								</motion.div>
 
-								{/* Glow Effect */}
+								{/* Glow Effect - Adjusted to scale with the card */}
 								<motion.div
 									animate={
-										hoveredPlan === index ? { opacity: 0.2 } : { opacity: 0 }
+										hoveredPlan === index
+											? { opacity: 0.2, scale: 1.05 } // Added scale animation
+											: { opacity: 0, scale: 1 } // Ensure scale resets
 									}
+									// Added transition for scale
+									transition={{ duration: 0.3 }}
 									className={`
                     absolute -inset-1 rounded-2xl
                     bg-gradient-to-r ${plan.color} blur-xl
-                    transition-opacity duration-300
                   `}
 									style={{ zIndex: -1 }}
 								/>
