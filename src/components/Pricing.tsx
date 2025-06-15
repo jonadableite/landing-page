@@ -12,24 +12,29 @@ import {
 import { ArrowRight, CheckCircle, Crown, Star, Zap } from "lucide-react";
 import { useRef, useState } from "react";
 
+
 export default function PricingPage() {
 	const [isYearly, setIsYearly] = useState(false);
 	const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
 	const [hoveredFeature, setHoveredFeature] = useState<string | null>(null);
 	const containerRef = useRef(null);
 
+
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
 		offset: ["start end", "end start"],
 	});
 
+
 	const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 	const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
 
 	const handleSubscription = (checkoutUrl: string) => {
 		console.log("Redirecionando para o checkout da Kiwify:", checkoutUrl);
 		window.location.href = checkoutUrl;
 	};
+
 
 	const plans = [
 		{
@@ -102,6 +107,7 @@ export default function PricingPage() {
 		},
 	];
 
+
 	return (
 		<div
 			ref={containerRef}
@@ -124,6 +130,7 @@ export default function PricingPage() {
 				}}
 			/>
 
+
 			{/* Floating Particles */}
 			{[...Array(30)].map((_, i) => (
 				<motion.div
@@ -140,6 +147,7 @@ export default function PricingPage() {
 					}}
 				/>
 			))}
+
 
 			<div className="max-w-7xl mx-auto relative z-10">
 				{/* Header Section */}
@@ -165,6 +173,7 @@ export default function PricingPage() {
 							</span>
 						</h2>
 					</motion.div>
+
 
 					{/* Pricing Toggle */}
 					<motion.div
@@ -217,10 +226,13 @@ export default function PricingPage() {
 					</motion.div>
 				</motion.div>
 
+
 				{/* Pricing Cards */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+				{/* Added items-stretch to ensure grid items stretch to fill the cell height */}
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
 					<AnimatePresence>
-						{plans.map((plan, index) => (
+						{/* Added filter(Boolean) for robustness */}
+						{plans.filter(Boolean).map((plan, index) => (
 							<motion.div
 								key={plan.name}
 								initial={{ opacity: 0, y: 50 }}
@@ -229,7 +241,7 @@ export default function PricingPage() {
 								transition={{ delay: index * 0.2 }}
 								onHoverStart={() => setHoveredPlan(index)}
 								onHoverEnd={() => setHoveredPlan(null)}
-								className="relative group"
+								className="relative group" // This is the grid item
 							>
 								{/* Main Card Content */}
 								<motion.div
@@ -243,6 +255,7 @@ export default function PricingPage() {
                     bg-deep-purple/30 backdrop-blur-xl
                     border border-gray-700
                     ${plan.popular ? "ring-2 ring-primary" : ""}
+                    h-full flex flex-col // Added h-full and flex flex-col
                   `}
 								>
 									{plan.popular && (
@@ -257,6 +270,7 @@ export default function PricingPage() {
 										</motion.div>
 									)}
 
+
 									<div
 										className={`
                       w-16 h-16 rounded-xl mb-6
@@ -267,9 +281,11 @@ export default function PricingPage() {
 										{plan.icon}
 									</div>
 
+
 									<h3 className="text-2xl font-bold text-white mb-2">
 										{plan.name}
 									</h3>
+
 
 									<div className="flex items-baseline gap-1 mb-6">
 										<span className="text-4xl font-bold text-white">
@@ -280,6 +296,7 @@ export default function PricingPage() {
 										</span>
 									</div>
 
+
 									{/* MonthlyPrice (apenas se for plano anual) */}
 									{isYearly && plan.monthlyPrice && (
 										<div className="text-sm text-green-500 mb-4">
@@ -287,12 +304,16 @@ export default function PricingPage() {
 										</div>
 									)}
 
+
 									{/* Description */}
 									<p className="text-gray-500 text-sm mb-8">
 										{plan.description}
 									</p>
 
-									<ul className="space-y-4 mb-8">
+
+									{/* Features list - flex-grow allows it to take up available space */}
+									<ul className="space-y-4 mb-8 flex-grow">
+										{/* Using index as key here is generally okay for static lists */}
 										{plan.features.map((feature, i) => (
 											<motion.li
 												key={i}
@@ -317,6 +338,8 @@ export default function PricingPage() {
 										))}
 									</ul>
 
+
+									{/* Button - mt-auto pushes it to the bottom */}
 									<motion.button
 										onClick={() => handleSubscription(plan.checkoutUrl)}
 										whileHover={{ scale: 1.05 }}
@@ -325,6 +348,7 @@ export default function PricingPage() {
                       w-full py-4 rounded-xl font-bold text-white
                       bg-gradient-to-r ${plan.color}
                       group relative overflow-hidden
+                      mt-auto // Added mt-auto
                     `}
 									>
 										<span className="relative z-10 flex items-center justify-center gap-2">
@@ -339,6 +363,7 @@ export default function PricingPage() {
 										/>
 									</motion.button>
 								</motion.div>
+
 
 								{/* Glow Effect - Adjusted to scale with the card */}
 								<motion.div
@@ -359,6 +384,7 @@ export default function PricingPage() {
 						))}
 					</AnimatePresence>
 				</div>
+
 
 				{/* Bottom CTA */}
 				<motion.div
