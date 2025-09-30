@@ -132,8 +132,8 @@ export default function TestGratuitoForm() {
 	const sendWhatsAppMessage = async (formData: FormData) => {
 		const message = formatFormData(formData);
 		const apiKey = "429683C4C977415CAAFCCE10F7D57E11";
-		const instance = "WhatLeads";
-		const recipientNumber = "5512992465180";
+		const instance = "Whatleads";
+		const recipientNumber = "5512988444921";
 
 		const options: RequestInit = {
 			method: "POST",
@@ -366,9 +366,8 @@ export default function TestGratuitoForm() {
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 							onClick={() => step < 2 && setStep(step + 1)}
-							className={`ml-auto px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition duration-300 flex items-center justify-center min-w-[200px] ${
-								isLoading ? "cursor-not-allowed" : ""
-							}`}
+							className={`ml-auto px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition duration-300 flex items-center justify-center min-w-[200px] ${isLoading ? "cursor-not-allowed" : ""
+								}`}
 							disabled={isLoading}
 							variants={buttonVariants}
 							animate={isLoading ? "loading" : "default"}

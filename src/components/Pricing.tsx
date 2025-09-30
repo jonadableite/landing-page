@@ -13,7 +13,7 @@ import { ArrowRight, CheckCircle, Crown, Star, Zap } from "lucide-react";
 import { useRef, useState } from "react";
 
 export default function PricingPage() {
-  const [isYearly, setIsYearly] = useState(false);
+  const [isYearly, setIsYearly] = useState(true);
   const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
   const [hoveredFeature, setHoveredFeature] = useState<string | null>(null);
   const containerRef = useRef(null);
