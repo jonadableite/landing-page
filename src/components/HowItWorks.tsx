@@ -41,7 +41,7 @@ const steps = [
 		title: "Análise de Resultados",
 		description:
 			"Acompanhe métricas e resultados em tempo real com dashboards detalhados.",
-		color: "from-purple-400 to-purple-600",
+		color: "from-[#4f47e6] to-[#4f47e6]/80",
 	},
 ];
 

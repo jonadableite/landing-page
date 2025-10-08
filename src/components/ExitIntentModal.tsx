@@ -207,7 +207,7 @@ export const ExitIntentModal: React.FC<ExitIntentModalProps> = ({
             exit="exit"
             className={`
               relative w-full max-w-md bg-gradient-to-br from-gray-900 to-gray-800
-              rounded-2xl shadow-2xl border border-purple-500/20 overflow-hidden
+              rounded-2xl shadow-2xl border border-[#4f47e6]/20 overflow-hidden
               ${className}
             `}
             onClick={(e) => e.stopPropagation()}
@@ -233,7 +233,7 @@ export const ExitIntentModal: React.FC<ExitIntentModalProps> = ({
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.2, type: 'spring' }}
-                      className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center"
+                      className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-[#4f47e6] to-blue-500 rounded-full flex items-center justify-center"
                     >
                       <Gift className="w-8 h-8 text-white" />
                     </motion.div>
@@ -248,13 +248,13 @@ export const ExitIntentModal: React.FC<ExitIntentModalProps> = ({
                   </div>
 
                   {/* Offer Highlight */}
-                  <div className="mb-6 p-4 bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-xl border border-purple-500/20">
+                  <div className="mb-6 p-4 bg-gradient-to-r from-[#4f47e6]/30 to-blue-900/30 rounded-xl border border-[#4f47e6]/20">
                     <div className="text-center">
                       <div className="text-lg font-semibold text-white mb-2">
                         {offer}
                       </div>
 
-                      <div className="flex items-center justify-center space-x-4 text-sm text-purple-200">
+                      <div className="flex items-center justify-center space-x-4 text-sm text-[#4f47e6]/80">
                         <span className="flex items-center space-x-1">
                           <Zap className="w-4 h-4" />
                           <span>Estratégias comprovadas</span>
@@ -283,7 +283,7 @@ export const ExitIntentModal: React.FC<ExitIntentModalProps> = ({
                         className="
                           w-full px-4 py-3 bg-gray-800/50 border border-gray-600/50
                           rounded-lg text-white placeholder-gray-400
-                          focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50
+                          focus:outline-none focus:ring-2 focus:ring-[#4f47e6]/50 focus:border-[#4f47e6]/50
                           transition-all duration-200
                         "
                         placeholder="seu@email.com"
@@ -309,7 +309,7 @@ export const ExitIntentModal: React.FC<ExitIntentModalProps> = ({
                           className="
                             w-full px-4 py-3 bg-gray-800/50 border border-gray-600/50
                             rounded-lg text-white placeholder-gray-400
-                            focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50
+                            focus:outline-none focus:ring-2 focus:ring-[#4f47e6]/50 focus:border-[#4f47e6]/50
                             transition-all duration-200
                           "
                           placeholder="(11) 99999-9999"
@@ -327,8 +327,8 @@ export const ExitIntentModal: React.FC<ExitIntentModalProps> = ({
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       className="
-                        w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-blue-500
-                        hover:from-purple-600 hover:to-blue-600 disabled:opacity-50
+                        w-full py-3 px-6 bg-gradient-to-r from-[#4f47e6] to-blue-500
+                    hover:from-[#4f47e6]/90 hover:to-blue-600 disabled:opacity-50
                         text-white font-semibold rounded-lg shadow-lg
                         transition-all duration-200 flex items-center justify-center space-x-2
                       "
@@ -395,7 +395,7 @@ export const ExitIntentModal: React.FC<ExitIntentModalProps> = ({
                     Verifique sua caixa de entrada (e spam).
                   </p>
 
-                  <div className="text-sm text-purple-300">
+                  <div className="text-sm text-[#4f47e6]/80">
                     Esta janela fechará automaticamente...
                   </div>
                 </div>

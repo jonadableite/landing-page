@@ -160,7 +160,7 @@ export default function UpsellPage({ originalPlan, onAccept, onDecline }: Upsell
                 <span className="text-sm">Automações Premium</span>
               </div>
               <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-purple-500" />
+                <Shield className="w-4 h-4 text-[#4f47e6]" />
                 <span className="text-sm">Suporte prioritário 24/7</span>
               </div>
               <div className="flex items-center gap-2">

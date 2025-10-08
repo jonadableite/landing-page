@@ -35,10 +35,14 @@ import Security from "./components/Seguranca";
 import Terms from "./components/Termos";
 import Testimonials from "./components/Testimonials";
 import Welcome from "./components/Welcome";
+import UpsellPage from "./components/UpsellPage";
 
 // Novos componentes otimizados
 import StickyCallToAction from "./components/StickyCallToAction";
 import ExitIntentModal from "./components/ExitIntentModal";
+
+// Following Pointer
+import { FollowerPointerCard } from "@/components/ui/following-pointer";
 
 // Analytics e UTM
 import { initializeAnalytics } from "./lib/analytics";
@@ -70,57 +74,60 @@ const App: React.FC = () => {
 
 	return (
 		<ReactLenis root>
-			<div className="flex flex-col min-h-screen relative">
-				{/* Renderiza o Header apenas se não estiver na rota de registro */}
-				{!shouldHideHeaderFooter && <Header />}
-				<div className="flex-grow">
-					<Routes>
-						<Route
-							path="/"
-							element={
-								<main>
-									<Hero />
-									<Feature />
-									<HowItWorks />
-									<Dashboard />
-									<FlowChartChatbot />
-									<CTASection />
-									<Pricing />
-									<Testimonials />
-									<FAQ />
-								</main>
-							}
-						/>
-						<Route path="/sobre" element={<About />} />
-						<Route path="/legal" element={<Legal />} />
-						<Route path="/privacy" element={<Privacy />} />
-						<Route path="/terms" element={<Terms />} />
-						<Route path="/security" element={<Security />} />
-						<Route path="/compliance" element={<Compliance />} />
-						<Route path="/trial-form" element={<TestGratuitoForm />} />
-						<Route path="/register" element={<Register />} />
-						<Route path="/welcome" element={<Welcome />} />
-						<Route path="/checkout" element={<CheckoutPage />} />
-						<Route path="/checkout-flow/:plan" element={
-							<CheckoutFlow
-								planName="Starter"
-								planPrice="R$ 97"
-								checkoutUrl="https://pay.hotmart.com/example"
+			<FollowerPointerCard title="WhatLeads">
+				<div className="flex flex-col min-h-screen relative">
+					{/* Renderiza o Header apenas se não estiver na rota de registro */}
+					{!shouldHideHeaderFooter && <Header />}
+					<div className="flex-grow">
+						<Routes>
+							<Route
+								path="/"
+								element={
+									<main>
+										<Hero />
+										<Feature />
+										<HowItWorks />
+										<Dashboard />
+										<FlowChartChatbot />
+										<CTASection />
+										<Pricing />
+										<Testimonials />
+										<FAQ />
+									</main>
+								}
 							/>
-						} />
-					</Routes>
-				</div>
-				{/* Renderiza o Footer apenas se não estiver na rota de registro */}
-				{!shouldHideHeaderFooter && <Footer />}
+							<Route path="/sobre" element={<About />} />
+							<Route path="/legal" element={<Legal />} />
+							<Route path="/privacy" element={<Privacy />} />
+							<Route path="/terms" element={<Terms />} />
+							<Route path="/security" element={<Security />} />
+							<Route path="/compliance" element={<Compliance />} />
+							<Route path="/trial-form" element={<TestGratuitoForm />} />
+							<Route path="/register" element={<Register />} />
+							<Route path="/welcome" element={<Welcome />} />
+							<Route path="/upsell" element={<UpsellPage originalPlan="Starter" onAccept={() => window.location.href = 'https://pay.hotmart.com/example?upsell=premium'} onDecline={() => window.location.href = '/checkout'} />} />
+							<Route path="/checkout" element={<CheckoutPage />} />
+							<Route path="/checkout-flow/:plan" element={
+								<CheckoutFlow
+									planName="Starter"
+									planPrice="R$ 97"
+									checkoutUrl="https://pay.hotmart.com/example"
+								/>
+							} />
+						</Routes>
+					</div>
+					{/* Renderiza o Footer apenas se não estiver na rota de registro */}
+					{!shouldHideHeaderFooter && <Footer />}
 
-				{/* Componentes globais de conversão */}
-				{!shouldHideHeaderFooter && (
-					<>
-						<StickyCallToAction />
-						<ExitIntentModal />
-					</>
-				)}
-			</div>
+					{/* Componentes globais de conversão */}
+					{!shouldHideHeaderFooter && (
+						<>
+							<StickyCallToAction />
+							<ExitIntentModal />
+						</>
+					)}
+				</div>
+			</FollowerPointerCard>
 		</ReactLenis>
 	);
 };

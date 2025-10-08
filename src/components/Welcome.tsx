@@ -25,7 +25,8 @@ const Welcome: React.FC = () => {
 
 	const handleProceedToCheckout = () => {
 		if (priceId) {
-			navigate("/checkout", {
+			// Estratégia de funil: primeiro leva para upsell, depois checkout
+			navigate("/upsell", {
 				state: { priceId, plan, price, billingCycle, companyId },
 			});
 		} else {

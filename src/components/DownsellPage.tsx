@@ -136,7 +136,7 @@ export default function DownsellPage({ originalPlan, onAccept, onDecline }: Down
                 <span className="text-sm">3 automações extras</span>
               </div>
               <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-purple-500" />
+                <Shield className="w-4 h-4 text-[#4f47e6]" />
                 <span className="text-sm">Suporte prioritário</span>
               </div>
               <div className="flex items-center gap-2">
@@ -183,7 +183,7 @@ export default function DownsellPage({ originalPlan, onAccept, onDecline }: Down
               <div className="text-muted-foreground">Mais contatos</div>
             </div>
             <div>
-              <div className="font-bold text-purple-600 text-lg">24/7</div>
+              <div className="font-bold text-[#4f47e6] text-lg">24/7</div>
               <div className="text-muted-foreground">Suporte prioritário</div>
             </div>
           </div>
