@@ -9,14 +9,18 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { ArrowRight, CheckCircle, Crown, Star, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle, Crown, Star, Zap, Shield, Clock, Award, TrendingUp, Users, Gift } from "lucide-react";
 import { useRef, useState } from "react";
+import { trackCTAClick } from "../lib/analytics";
+import { useUTM } from "../lib/utm";
+import { Countdown } from "./Countdown";
 
 export default function PricingPage() {
   const [isYearly, setIsYearly] = useState(true);
   const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
   const [hoveredFeature, setHoveredFeature] = useState<string | null>(null);
   const containerRef = useRef(null);
+  const { params: utmParams } = useUTM();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -26,7 +30,15 @@ export default function PricingPage() {
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
-  const handleSubscription = (checkoutUrl: string) => {
+  const handleSubscription = (checkoutUrl: string, planName: string, price: number) => {
+    trackCTAClick('pricing_plan_select', {
+      plan_name: planName,
+      price: price,
+      billing_cycle: isYearly ? 'yearly' : 'monthly',
+      position: 'pricing_section',
+      ...utmParams,
+    });
+    
     console.log("Redirecionando para o checkout da Hotmart:", checkoutUrl);
     window.location.href = checkoutUrl;
   };

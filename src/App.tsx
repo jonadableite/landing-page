@@ -8,6 +8,7 @@
  */
 import { ReactLenis } from "lenis/react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 /**
  * Components
@@ -17,6 +18,7 @@ import Hero from "@/components/Hero";
 import About from "./components/About";
 import CTASection from "./components/CTASection";
 import CheckoutPage from "./components/CheckoutPage";
+import CheckoutFlow from "./components/CheckoutFlow";
 import Compliance from "./components/Compliance";
 import Dashboard from "./components/Dashboard";
 import FAQ from "./components/FAQ";
@@ -34,6 +36,14 @@ import Terms from "./components/Termos";
 import Testimonials from "./components/Testimonials";
 import Welcome from "./components/Welcome";
 
+// Novos componentes otimizados
+import StickyCallToAction from "./components/StickyCallToAction";
+import ExitIntentModal from "./components/ExitIntentModal";
+
+// Analytics e UTM
+import { initializeAnalytics } from "./lib/analytics";
+import { UTMManager } from "./lib/utm";
+
 const App: React.FC = () => {
 	// Obtém a localização atual para condicionar a exibição do Header e Footer
 	const location = useLocation();
@@ -45,6 +55,18 @@ const App: React.FC = () => {
 	const shouldHideHeaderFooter = hideHeaderFooterRoutes.includes(
 		location.pathname,
 	);
+
+	// Inicializar analytics e UTM na montagem do componente
+	useEffect(() => {
+		// Inicializar analytics (GTM e Facebook Pixel)
+		initializeAnalytics({
+			gtmId: 'GTM-XXXXXXX', // Substitua pelo seu GTM ID
+			facebookPixelId: '000000000000000', // Substitua pelo seu Facebook Pixel ID
+		});
+
+		// Inicializar captura de parâmetros UTM (a captura é automática no construtor)
+		new UTMManager();
+	}, []);
 
 	return (
 		<ReactLenis root>
@@ -79,10 +101,25 @@ const App: React.FC = () => {
 						<Route path="/register" element={<Register />} />
 						<Route path="/welcome" element={<Welcome />} />
 						<Route path="/checkout" element={<CheckoutPage />} />
+						<Route path="/checkout-flow/:plan" element={
+							<CheckoutFlow
+								planName="Starter"
+								planPrice="R$ 97"
+								checkoutUrl="https://pay.hotmart.com/example"
+							/>
+						} />
 					</Routes>
 				</div>
 				{/* Renderiza o Footer apenas se não estiver na rota de registro */}
 				{!shouldHideHeaderFooter && <Footer />}
+
+				{/* Componentes globais de conversão */}
+				{!shouldHideHeaderFooter && (
+					<>
+						<StickyCallToAction />
+						<ExitIntentModal />
+					</>
+				)}
 			</div>
 		</ReactLenis>
 	);

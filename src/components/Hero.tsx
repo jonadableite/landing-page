@@ -14,6 +14,8 @@ import Brand from "@/components/Brand";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
+import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import {
 	type Variants,
 	motion,
@@ -21,13 +23,18 @@ import {
 	useSpring,
 	useTransform,
 } from "framer-motion";
-import { CirclePlay } from "lucide-react";
+import { CirclePlay, Star, Users, Shield, Zap, TrendingUp, CheckCircle } from "lucide-react";
 /**
  * Node Modules
  */
 import { useRef } from "react";
 import ReactPlayer from "react-player/youtube";
 import { useNavigate } from "react-router-dom";
+/**
+ * Analytics
+ */
+import { trackCTAClick } from "../lib/analytics";
+import { useUTM } from "../lib/utm";
 
 /**
  * Constants
@@ -76,6 +83,7 @@ const imageVariants: Variants = {
 const Hero = () => {
 	const navigate = useNavigate();
 	const dashboardLinhaRef = useRef<HTMLElement>(null);
+	const { params: utmParams } = useUTM();
 
 	const { scrollYProgress } = useScroll({
 		target: dashboardLinhaRef,
@@ -91,7 +99,20 @@ const Hero = () => {
 	});
 
 	const handleStartTrial = () => {
+		trackCTAClick('hero_primary_cta', {
+			button_text: 'Começar Agora - Grátis',
+			position: 'hero_section',
+			...utmParams,
+		});
 		navigate("/trial-form");
+	};
+
+	const handleWatchDemo = () => {
+		trackCTAClick('hero_secondary_cta', {
+			button_text: 'Ver Demonstração',
+			position: 'hero_section',
+			...utmParams,
+		});
 	};
 
 	return (
@@ -107,21 +128,25 @@ const Hero = () => {
 						variants={heroChildVariants}
 						className="text-sm uppercase tracking-wider bg-secondary/50 text-secondary-foreground max-w-max mx-auto px-3 py-1 rounded-full border-t border-blue-500/10 backdrop-blur-3xl mb-6 md:mb-10"
 					>
-						{heroData.sectionSubtitle}
+						🚀 Plataforma #1 em Automação WhatsApp
 					</motion.p>
 
 					<motion.h2
 						variants={heroChildVariants}
 						className="text-4xl font-semibold !leading-tight mb-4 md-text-5xl md:mb-5 lg:text-6xl"
 					>
-						{heroData.sectionTitle}
+						Multiplique suas vendas no WhatsApp{" "}
 						<motion.span
 							className="relative isolate ms-4 inline-block"
 							initial={{ rotate: -5 }}
 							animate={{ rotate: 0 }}
 							transition={{ duration: 0.5, delay: 0.8 }}
 						>
-							{heroData.decoTitle}
+							<LayoutTextFlip
+								text=""
+								words={["em até 10x", "sem ban"]}
+								duration={3000}
+							/>
 							<motion.span
 								className="absolute -z-10 top-2 -left-6 -right-4 bottom-0.5 bg-foreground/5 rounded-full px-8 ms-3 border-t border-foreground/20 shadow-[inset_0px_0px_30px_0px] shadow-foreground/20 md:top-3 md:bottom-1 lg:top-4 lg:bottom-2"
 								initial={{ scaleX: 0 }}
@@ -133,10 +158,76 @@ const Hero = () => {
 
 					<motion.p
 						variants={heroChildVariants}
-						className="text-muted-foreground md:text-xl"
+						className="text-muted-foreground md:text-xl mb-6"
 					>
-						{heroData.sectionText}
+						Automatize suas vendas, aumente conversões e escale seu negócio com nossa plataforma completa de WhatsApp Marketing.
 					</motion.p>
+
+					{/* Prova Social com Animated Tooltip - Reposicionada para máxima conversão */}
+					<motion.div
+						variants={heroChildVariants}
+						className="flex items-center justify-center gap-3 mb-8"
+					>
+						<div className="flex -space-x-2">
+							<AnimatedTooltip
+								items={[
+									{
+										id: 1,
+										name: "Maria Silva",
+										designation: "Empreendedora Digital",
+										image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+									},
+									{
+										id: 2,
+										name: "João Santos",
+										designation: "CEO Startup",
+										image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+									},
+									{
+										id: 3,
+										name: "Ana Costa",
+										designation: "Marketing Manager",
+										image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+									},
+									{
+										id: 4,
+										name: "Carlos Lima",
+										designation: "E-commerce Owner",
+										image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+									},
+									{
+										id: 5,
+										name: "Lucia Ferreira",
+										designation: "Consultora de Vendas",
+										image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1061&q=80"
+									}
+								]}
+							/>
+						</div>
+						<div className="h-3.5 w-[0.85px] bg-white/65"></div>
+						<span className="font-inter font-normal text-[#D0D0D0] text-xs leading-tight sm:text-sm">
+							Mais de 30.100 usuários já usaram
+						</span>
+					</motion.div>
+
+					{/* Features com ícones - Anti-ban, etc. */}
+					<motion.div
+						variants={heroChildVariants}
+						className="flex flex-wrap justify-center gap-4 mb-8 md:gap-6"
+					>
+						<div className="flex items-center space-x-2 bg-green-500/10 text-green-400 px-4 py-2 rounded-full border border-green-500/20">
+							<Shield className="w-5 h-5" />
+							<span className="text-sm font-medium">100% Anti-Ban</span>
+						</div>
+						<div className="flex items-center space-x-2 bg-blue-500/10 text-blue-600 px-4 py-2 rounded-full border border-blue-500/20">
+							<Zap className="w-5 h-5" />
+							<span className="text-sm font-medium">Automação Inteligente</span>
+						</div>
+						<div className="flex items-center space-x-2 bg-[#1e1b4a]/10 text-blue-400 px-4 py-2 rounded-full border border-[#1e1b4a]/20">
+							<CheckCircle className="w-5 h-5" />
+							<span className="text-sm font-medium">Resultados Garantidos</span>
+						</div>
+					</motion.div>
 
 					<motion.div
 						variants={heroChildVariants}
