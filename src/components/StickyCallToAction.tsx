@@ -148,7 +148,7 @@ export const StickyCallToAction: React.FC<StickyCallToActionProps> = ({
           className={`
             fixed ${position === 'bottom' ? 'bottom-0' : 'top-0'} left-0 right-0 z-50
             bg-gradient-to-r from-[#1a1a2e] via-[#16213e] to-[#0f3460]
-            border-t-2 border-gradient-to-r from-[#4f47e6] via-blue-500 to-cyan-500
+            border-t-2 border-gradient-to-r from-[#4f47e6] via-blue-500 to-[#252261]
             shadow-2xl backdrop-blur-lg
             ${className}
           `}
