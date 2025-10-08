@@ -75,7 +75,8 @@ export const StickyCallToAction: React.FC<StickyCallToActionProps> = ({
     if (action === 'trial') {
       navigate('/trial-form');
     } else {
-      navigate('/checkout');
+      // Redirecionar para o link do Hotmart
+      window.open('https://pay.hotmart.com/K99734443S?off=unhl7sd0&checkoutMode=6&bid=1759884647707', '_blank');
     }
 
     onCtaClick?.(action);
