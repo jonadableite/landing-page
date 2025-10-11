@@ -47,6 +47,8 @@ import { FollowerPointerCard } from "@/components/ui/following-pointer";
 // Analytics e UTM
 import { initializeAnalytics } from "./lib/analytics";
 import { UTMManager } from "./lib/utm";
+import { initializeClarity } from "./lib/clarity";
+import { useScrollTracking, useExitIntentTracking } from "./hooks/useScrollTracking";
 
 const App: React.FC = () => {
 	// Obtém a localização atual para condicionar a exibição do Header e Footer
@@ -60,6 +62,15 @@ const App: React.FC = () => {
 		location.pathname,
 	);
 
+	// Hooks de tracking para otimização de conversões
+	useScrollTracking({
+		sectionName: location.pathname,
+		scrollDepths: [25, 50, 75, 100],
+		minTimeOnSection: 5000,
+	});
+
+	useExitIntentTracking();
+
 	// Inicializar analytics e UTM na montagem do componente
 	useEffect(() => {
 		// Inicializar analytics (GTM e Facebook Pixel)
@@ -67,6 +78,9 @@ const App: React.FC = () => {
 			gtmId: 'GTM-XXXXXXX', // Substitua pelo seu GTM ID
 			facebookPixelId: '000000000000000', // Substitua pelo seu Facebook Pixel ID
 		});
+
+		// Inicializar Microsoft Clarity para análise de comportamento e conversões
+		initializeClarity('tom5vd9sxc'); // Substitua pelo seu Project ID do Clarity
 
 		// Inicializar captura de parâmetros UTM (a captura é automática no construtor)
 		new UTMManager();

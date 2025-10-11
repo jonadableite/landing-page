@@ -4,6 +4,7 @@ import { X, Zap, Shield, Clock, Star, TrendingUp, Gift, ArrowRight } from 'lucid
 import { useNavigate } from 'react-router-dom';
 import { trackCTAClick } from '../lib/analytics';
 import { useUTM } from '../lib/utm';
+import clarityService from '../lib/clarity';
 
 interface StickyCallToActionProps {
   /** Show/hide the sticky CTA */
@@ -70,7 +71,15 @@ export const StickyCallToAction: React.FC<StickyCallToActionProps> = ({
   }, [offers.length]);
 
   const handleCtaClick = (action: 'trial' | 'buy') => {
+    // Track no analytics existente
     trackCTAClick('sticky_cta', action, utmParams as Record<string, string>);
+    
+    // Track no Clarity para análise de comportamento
+    clarityService.trackCTAClick(
+      `sticky_${action}_button`,
+      'sticky_bottom_bar',
+      action === 'trial' ? '/trial-form' : 'https://pay.hotmart.com/K99734443S'
+    );
 
     if (action === 'trial') {
       navigate('/trial-form');

@@ -35,6 +35,7 @@ import { useNavigate } from "react-router-dom";
  */
 import { trackCTAClick } from "../lib/analytics";
 import { useUTM } from "../lib/utm";
+import clarityService from "../lib/clarity";
 
 /**
  * Constants
@@ -104,6 +105,14 @@ const Hero = () => {
 			position: 'hero_section',
 			...utmParams,
 		});
+		
+		// Track no Clarity
+		clarityService.trackCTAClick(
+			'hero_primary_cta',
+			'hero_section',
+			'/trial-form'
+		);
+		
 		navigate("/trial-form");
 	};
 
@@ -113,6 +122,13 @@ const Hero = () => {
 			position: 'hero_section',
 			...utmParams,
 		});
+		
+		// Track no Clarity
+		clarityService.trackCTAClick(
+			'hero_watch_demo',
+			'hero_section',
+			'#demo-video'
+		);
 	};
 
 	return (

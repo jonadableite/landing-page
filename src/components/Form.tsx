@@ -16,6 +16,7 @@ import {
 	FiUser,
 } from "react-icons/fi";
 import FloatingIcons from "./FloatingIcons";
+import clarityService from "../lib/clarity";
 
 const businessTypes = [
 	"E-commerce",
@@ -97,17 +98,37 @@ export default function TestGratuitoForm() {
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
+		
+		// Track início do formulário no Clarity
+		clarityService.trackFormStart('trial_form', 'trial_form_page');
+		clarityService.trackPageView('trial_form', 'conversion');
 	}, []);
 
 	const onSubmit: SubmitHandler<FormData> = async (data) => {
 		setIsLoading(true);
 		setSubmitError(null);
 		console.log(data);
+		
 		try {
 			await sendWhatsAppMessage(data);
+			
+			// Track sucesso do formulário no Clarity
+			clarityService.trackFormSubmit('trial_form', 'trial_form_page', true);
+			clarityService.trackConversion({
+				eventName: 'trial_form_completed',
+				properties: {
+					business_type: data.businessType,
+					form_completion_time: Date.now() - performance.timing.navigationStart,
+				}
+			});
+			
 			setIsSubmitted(true);
 		} catch (error) {
 			console.error("Erro ao enviar formulário:", error);
+			
+			// Track erro do formulário no Clarity
+			clarityService.trackFormSubmit('trial_form', 'trial_form_page', false);
+			
 			setSubmitError(
 				"Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.",
 			);
