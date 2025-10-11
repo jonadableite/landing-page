@@ -3,7 +3,7 @@
  * @license Apache-2.0
  */
 
-import { clarity } from '@microsoft/clarity';
+import clarity from '@microsoft/clarity';
 import { clarityOptimization } from './clarity-optimization';
 import clarityPerformanceOptimizer from './clarity-performance';
 
@@ -37,26 +37,14 @@ class ClarityService {
     this.config = config;
 
     try {
-      // Inicializar Clarity com configurações otimizadas
-      clarity.init(config.projectId, {
-        // Configurações para máxima coleta de dados
-        enableHeatmaps: config.enableHeatmaps ?? true,
-        enableRecordings: config.enableRecordings ?? true,
-        enableAnalytics: config.enableAnalytics ?? true,
-        // Configurações de performance
-        uploadUrl: 'https://www.clarity.ms/collect',
-        // Configurações de privacidade (ajuste conforme necessário)
-        maskTextSelector: '.sensitive-data',
-        // Configurações de sampling (100% para máxima coleta)
-        samplingRate: 100,
-      });
+      // Inicializar Clarity com o project ID
+      clarity.init(config.projectId);
 
       this.isInitialized = true;
       console.log('Microsoft Clarity inicializado com sucesso');
-      
+
       // Identificar sessão inicial
       this.identifySession();
-      
     } catch (error) {
       console.error('Erro ao inicializar Microsoft Clarity:', error);
     }
@@ -78,8 +66,14 @@ class ClarityService {
       };
 
       // Capturar parâmetros UTM
-      const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
-      utmParams.forEach(param => {
+      const utmParams = [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+      ];
+      utmParams.forEach((param) => {
         const value = urlParams.get(param);
         if (value) {
           sessionData[param] = value;
@@ -87,8 +81,7 @@ class ClarityService {
       });
 
       // Identificar sessão no Clarity
-      clarity.identify('session_start', sessionData);
-      
+      clarity('identify', sessionData);
     } catch (error) {
       console.error('Erro ao identificar sessão:', error);
     }
@@ -99,7 +92,10 @@ class ClarityService {
    */
   trackConversion(event: ConversionEvent): void {
     if (!this.isInitialized) {
-      console.warn('Clarity não foi inicializado. Evento não enviado:', event.eventName);
+      console.warn(
+        'Clarity não foi inicializado. Evento não enviado:',
+        event.eventName
+      );
       return;
     }
 
@@ -119,9 +115,8 @@ class ClarityService {
         eventData.currency = event.currency;
       }
 
-      clarity.event(event.eventName, eventData);
+      clarity('event', event.eventName, eventData);
       console.log('Evento de conversão rastreado:', event.eventName, eventData);
-      
     } catch (error) {
       console.error('Erro ao rastrear evento de conversão:', error);
     }
@@ -130,7 +125,11 @@ class ClarityService {
   /**
    * Rastreia cliques em CTAs com otimizações avançadas
    */
-  trackCTAClick(ctaName: string, ctaLocation: string, targetUrl?: string): void {
+  trackCTAClick(
+    ctaName: string,
+    ctaLocation: string,
+    targetUrl?: string
+  ): void {
     // Incrementa contador para otimização
     clarityOptimization.incrementCTAClicks();
 
@@ -141,7 +140,7 @@ class ClarityService {
         cta_location: ctaLocation,
         target_url: targetUrl,
         user_agent: navigator.userAgent,
-      }
+      },
     });
   }
 
@@ -165,13 +164,17 @@ class ClarityService {
   /**
    * Rastreia envio de formulário
    */
-  trackFormSubmit(formName: string, formLocation: string, success: boolean = true): void {
+  trackFormSubmit(
+    formName: string,
+    formLocation: string,
+    success: boolean = true
+  ): void {
     this.trackConversion({
       eventName: success ? 'form_submit_success' : 'form_submit_error',
       properties: {
         form_name: formName,
         form_location: formLocation,
-      }
+      },
     });
   }
 
@@ -188,7 +191,7 @@ class ClarityService {
         page_name: pageName,
         page_category: pageCategory,
         page_title: document.title,
-      }
+      },
     });
   }
 
@@ -203,14 +206,18 @@ class ClarityService {
       properties: {
         plan_name: planName,
         plan_price: planPrice,
-      }
+      },
     });
   }
 
   /**
    * Rastreia compra finalizada
    */
-  trackPurchase(planName: string, planPrice: string, transactionId?: string): void {
+  trackPurchase(
+    planName: string,
+    planPrice: string,
+    transactionId?: string
+  ): void {
     this.trackConversion({
       eventName: 'purchase',
       value: parseFloat(planPrice.replace(/[^\d,]/g, '').replace(',', '.')),
@@ -219,7 +226,7 @@ class ClarityService {
         plan_name: planName,
         plan_price: planPrice,
         transaction_id: transactionId,
-      }
+      },
     });
   }
 
@@ -232,7 +239,7 @@ class ClarityService {
       properties: {
         section_name: sectionName,
         time_spent_seconds: timeSpent,
-      }
+      },
     });
   }
 
@@ -246,7 +253,7 @@ class ClarityService {
         scroll_percentage: percentage,
         page_height: document.body.scrollHeight,
         viewport_height: window.innerHeight,
-      }
+      },
     });
   }
 
@@ -259,7 +266,7 @@ class ClarityService {
       properties: {
         trigger: trigger,
         time_on_page: Date.now() - performance.timing.navigationStart,
-      }
+      },
     });
   }
 
@@ -270,7 +277,7 @@ class ClarityService {
     if (!this.isInitialized) return;
 
     try {
-      clarity.identify('user_attributes', attributes);
+      clarity('identify', attributes);
     } catch (error) {
       console.error('Erro ao definir atributos do usuário:', error);
     }
@@ -281,9 +288,9 @@ class ClarityService {
    */
   getSessionId(): string | null {
     if (!this.isInitialized) return null;
-    
+
     try {
-      return clarity.getSessionId() || null;
+      return (window as any).clarity?.getSessionId?.() || null;
     } catch (error) {
       console.error('Erro ao obter ID da sessão:', error);
       return null;
@@ -295,7 +302,10 @@ class ClarityService {
 export const clarityService = new ClarityService();
 
 // Configuração padrão otimizada para conversões com performance
-export const initializeClarity = (projectId: string, config?: Partial<ClarityConfig>) => {
+export const initializeClarity = (
+  projectId: string,
+  config?: Partial<ClarityConfig>
+) => {
   const clarityConfig: ClarityConfig = {
     projectId,
     enableHeatmaps: true,
@@ -307,7 +317,7 @@ export const initializeClarity = (projectId: string, config?: Partial<ClarityCon
   // Inicializa com otimização de performance
   clarityPerformanceOptimizer.initializeClarityWithDelay(() => {
     clarityService.initialize(clarityConfig);
-    
+
     // Inicia monitoramento de performance
     clarityPerformanceOptimizer.monitorAndAdjustPerformance();
   });
