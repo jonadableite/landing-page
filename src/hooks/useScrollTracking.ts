@@ -3,9 +3,8 @@
  * @license Apache-2.0
  */
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import clarityService from '../lib/clarity';
-import { clarityOptimization } from '../lib/clarity-optimization';
 
 interface ScrollTrackingOptions {
   /** Porcentagens de scroll para rastrear (padrão: [25, 50, 75, 100]) */
@@ -37,9 +36,6 @@ export const useScrollTracking = (options: ScrollTrackingOptions = {}) => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercentage = Math.round((scrollTop / documentHeight) * 100);
-
-      // Atualiza dados de otimização
-      clarityOptimization.updateMaxScrollDepth(scrollPercentage);
 
       // Track scroll depths
       scrollDepths.forEach(depth => {

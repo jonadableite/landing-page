@@ -104,8 +104,8 @@ const App: React.FC = () => {
 										<Dashboard />
 										<FlowChartChatbot />
 										<CTASection />
-										<Pricing />
 										<Testimonials />
+										<Pricing />
 										<FAQ />
 									</main>
 								}

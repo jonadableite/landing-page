@@ -3,9 +3,12 @@
  * @license Apache-2.0
  */
 
-import clarity from '@microsoft/clarity';
-import { clarityOptimization } from './clarity-optimization';
-import clarityPerformanceOptimizer from './clarity-performance';
+// Declaração global para o Microsoft Clarity
+declare global {
+  interface Window {
+    clarity: (action: string, ...args: any[]) => void;
+  }
+}
 
 interface ClarityConfig {
   projectId: string;
@@ -37,17 +40,47 @@ class ClarityService {
     this.config = config;
 
     try {
-      // Inicializar Clarity com o project ID
-      clarity.init(config.projectId);
-
+      // Carregar script do Clarity dinamicamente
+      this.loadClarityScript(config.projectId);
+      
       this.isInitialized = true;
       console.log('Microsoft Clarity inicializado com sucesso');
 
-      // Identificar sessão inicial
-      this.identifySession();
+      // Identificar sessão inicial após um pequeno delay
+      setTimeout(() => {
+        this.identifySession();
+      }, 1000);
     } catch (error) {
       console.error('Erro ao inicializar Microsoft Clarity:', error);
     }
+  }
+
+  /**
+   * Carrega o script do Microsoft Clarity dinamicamente
+   */
+  private loadClarityScript(projectId: string): void {
+    // Verificar se já foi carregado
+    if (window.clarity) {
+      window.clarity('init', projectId);
+      return;
+    }
+
+    // Criar e inserir o script
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+    script.src = 'https://www.clarity.ms/tag/' + projectId;
+    
+    // Adicionar ao head
+    const head = document.getElementsByTagName('head')[0];
+    head.appendChild(script);
+
+    // Configurar função global
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", projectId);
   }
 
   /**
@@ -57,15 +90,17 @@ class ClarityService {
     if (!this.isInitialized) return;
 
     try {
-      // Capturar informações de UTM e referrer
-      const urlParams = new URLSearchParams(window.location.search);
       const sessionData: Record<string, any> = {
-        page_url: window.location.href,
-        referrer: document.referrer,
         timestamp: new Date().toISOString(),
+        page_url: window.location.href,
+        page_title: document.title,
+        user_agent: navigator.userAgent,
+        screen_resolution: `${screen.width}x${screen.height}`,
+        viewport_size: `${window.innerWidth}x${window.innerHeight}`,
       };
 
-      // Capturar parâmetros UTM
+      // Capturar parâmetros UTM se disponíveis
+      const urlParams = new URLSearchParams(window.location.search);
       const utmParams = [
         'utm_source',
         'utm_medium',
@@ -81,7 +116,7 @@ class ClarityService {
       });
 
       // Identificar sessão no Clarity
-      clarity('identify', sessionData);
+      window.clarity('identify', sessionData);
     } catch (error) {
       console.error('Erro ao identificar sessão:', error);
     }
@@ -115,7 +150,7 @@ class ClarityService {
         eventData.currency = event.currency;
       }
 
-      clarity('event', event.eventName, eventData);
+      window.clarity('event', event.eventName, eventData);
       console.log('Evento de conversão rastreado:', event.eventName, eventData);
     } catch (error) {
       console.error('Erro ao rastrear evento de conversão:', error);
@@ -123,16 +158,13 @@ class ClarityService {
   }
 
   /**
-   * Rastreia cliques em CTAs com otimizações avançadas
+   * Rastreia cliques em CTAs
    */
   trackCTAClick(
     ctaName: string,
     ctaLocation: string,
     targetUrl?: string
   ): void {
-    // Incrementa contador para otimização
-    clarityOptimization.incrementCTAClicks();
-
     this.trackConversion({
       eventName: 'cta_click',
       properties: {
@@ -145,12 +177,9 @@ class ClarityService {
   }
 
   /**
-   * Rastreia interações com formulários com otimizações
+   * Rastreia interações com formulários
    */
   trackFormStart(formName: string, formLocation: string): void {
-    // Incrementa contador para otimização
-    clarityOptimization.incrementFormInteractions();
-
     this.trackConversion({
       eventName: 'form_start',
       properties: {
@@ -179,12 +208,9 @@ class ClarityService {
   }
 
   /**
-   * Rastreia visualização de página com otimizações
+   * Rastreia visualização de página
    */
   trackPageView(pageName: string, pageCategory?: string): void {
-    // Incrementa contador para otimização
-    clarityOptimization.incrementPageViews();
-
     this.trackConversion({
       eventName: 'page_view',
       properties: {
@@ -277,7 +303,7 @@ class ClarityService {
     if (!this.isInitialized) return;
 
     try {
-      clarity('identify', attributes);
+      window.clarity('identify', attributes);
     } catch (error) {
       console.error('Erro ao definir atributos do usuário:', error);
     }
@@ -301,7 +327,7 @@ class ClarityService {
 // Instância singleton
 export const clarityService = new ClarityService();
 
-// Configuração padrão otimizada para conversões com performance
+// Configuração padrão otimizada para conversões
 export const initializeClarity = (
   projectId: string,
   config?: Partial<ClarityConfig>
@@ -314,13 +340,16 @@ export const initializeClarity = (
     ...config,
   };
 
-  // Inicializa com otimização de performance
-  clarityPerformanceOptimizer.initializeClarityWithDelay(() => {
+  // Inicialização simples e direta
+  if (document.readyState === 'complete') {
     clarityService.initialize(clarityConfig);
-
-    // Inicia monitoramento de performance
-    clarityPerformanceOptimizer.monitorAndAdjustPerformance();
-  });
+  } else {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        clarityService.initialize(clarityConfig);
+      }, 500); // Delay mínimo de 500ms
+    });
+  }
 };
 
 export default clarityService;

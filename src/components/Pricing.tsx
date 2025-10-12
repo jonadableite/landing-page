@@ -51,68 +51,68 @@ export default function PricingPage() {
   // Define raw plan data with numerical prices
   const rawPlans = [
     {
-      name: "Starter",
+      name: "Starter WhatsApp",
       icon: <Zap className="w-8 h-8" />,
       annualPriceValue: 1299.00, // Numerical annual price
       monthlyPriceValue: 129.90, // Numerical monthly price
-      description: "Ideal para iniciantes e pequenos negócios",
+      description: "Aumente conversões via WhatsApp com proteção anti-ban",
       color: "from-blue-500 to-cyan-400",
       features: [
-        "15.000 mensagens/mês",
-        "1.000 leads/mês",
-        "2 automações ativas",
-        "Suporte por email",
-        "Analytics básico",
-        "Aquecedor básico",
+        "15.000 mensagens WhatsApp/mês",
+        "1.000 leads qualificados/mês",
+        "2 automações de vendas ativas",
+        "Plataforma anti-ban WhatsApp",
+        "Relatórios de mensagens básicos",
+        "Sistema de aquecimento básico",
       ],
       checkoutUrlMonthly: "https://pay.hotmart.com/K99734443S?off=6dzaxpbx&checkoutMode=10",
       checkoutUrlYearly: "https://pay.hotmart.com/K99734443S?off=496h6ukc&checkoutMode=6",
     },
     {
-      name: "Pro",
+      name: "Pro WhatsApp",
       icon: <Star className="w-8 h-8" />,
       annualPriceValue: 2499.00, // Numerical annual price
       monthlyPriceValue: 249.90, // Numerical monthly price
       popular: true,
       description:
-        "Perfeito para usuários que precisam de mais recursos e suporte prioritário",
+        "Vendas automáticas no WhatsApp com IA e controle total das campanhas",
       color: "from-violet-500 to-purple-500",
       features: [
-        "2 Agentes de IA",
-        "50.000 mensagens/mês",
-        "5.000 leads/mês",
-        "Automações ilimitadas",
-        "Suporte prioritário",
-        "Analytics avançado",
-        "API completa",
-        "Aquecedor avançado",
-        "Integrações premium",
+        "2 Agentes de IA para WhatsApp",
+        "50.000 mensagens WhatsApp/mês",
+        "5.000 leads segmentados/mês",
+        "Automação completa para e-commerces",
+        "Suporte e onboarding especializado",
+        "Relatórios e métricas reais",
+        "API completa para integrações",
+        "Sistema anti-ban avançado",
+        "Segmentação inteligente WhatsApp",
       ],
       checkoutUrlMonthly: "https://pay.hotmart.com/K99734443S?off=yfn3498r&checkoutMode=6",
       checkoutUrlYearly: "https://pay.hotmart.com/K99734443S?off=unhl7sd0&checkoutMode=6",
     },
     {
-      name: "Enterprise",
+      name: "Enterprise WhatsApp",
       icon: <Crown className="w-8 h-8" />,
       annualPriceValue: 4999.00, // Numerical annual price
       monthlyPriceValue: 499.90, // Numerical monthly price
       description:
-        "Solução completa para grandes empresas e necessidades complexas",
+        "WhatsApp marketing para agências com disparos ilimitados e segurança máxima",
       color: "from-orange-500 to-pink-500",
       features: [
-        "Agentes ilimitados",
-        "Disparos ilimitados",
-        "Mensagens ilimitadas",
-        "Automações ilimitadas",
-        "Leads ilimitados",
-        "Recursos exclusivos",
-        "Suporte 24/7 VIP",
-        "Analytics personalizado",
-        "API dedicada",
-        "Setup assistido",
+        "Agentes de IA ilimitados",
+        "Disparos com segurança e escala",
+        "Mensagens WhatsApp ilimitadas",
+        "Automação completa ilimitada",
+        "Leads e conversões ilimitados",
+        "Ferramenta com IA avançada",
+        "Suporte 24/7 VIP especializado",
+        "Relatórios personalizados",
+        "API dedicada para WhatsApp",
+        "Setup assistido completo",
         "Integrações personalizadas",
-        "Aquecedor personalizado",
-        "Treinamento da equipe",
+        "Sistema anti-ban personalizado",
+        "Treinamento especializado da equipe",
       ],
       checkoutUrlMonthly: "https://pay.hotmart.com/K99734443S?off=rxy4yhqx&checkoutMode=6",
       checkoutUrlYearly: "https://pay.hotmart.com/K99734443S?off=vi4ma9kh&checkoutMode=6",
@@ -193,11 +193,11 @@ export default function PricingPage() {
           >
             <h2 className="text-6xl md:text-7xl font-bold leading-tight">
               <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                Escolha o Plano
+                Planos WhatsApp
               </span>
               <br />
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Ideal para Você
+                Anti-Ban e Automação
               </span>
             </h2>
           </motion.div>

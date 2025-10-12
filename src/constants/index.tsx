@@ -135,51 +135,49 @@ export const navMenu: MenuItem[] = [
 
 // Hero
 export const heroData = {
-	sectionSubtitle: "Ferramenta de markting tudo-em-um",
-	sectionTitle: "A próxima geração de análise de ",
-	decoTitle: "disparos",
+	sectionSubtitle: "Plataforma Anti-Ban WhatsApp Marketing",
+	sectionTitle: "Aumente suas conversões via WhatsApp com ",
+	decoTitle: "segurança total",
 	sectionText:
-		"Análise de disparos da próxima geração: Obtenha insights valiosos sobre o comportamento do lead  e campanhas para tomar decisões baseadas em dados com nossa plataforma revolucionária.",
+		"Plataforma completa para vendas automáticas no WhatsApp: Aumente sua taxa de entrega, reduza bloqueios de contas e tenha controle total das campanhas com nossa ferramenta com IA e segmentação inteligente.",
 };
 
 // Feature
 export const featureData = {
-	sectionSubtitle: "Recursos",
-	sectionTitle: "Descubra Recursos Poderosos",
+	sectionSubtitle: "Recursos Anti-Ban",
+	sectionTitle: "Automação Completa para E-commerces no WhatsApp",
 	sectionText:
-		"Libere o poder da nossa plataforma com uma multidão de recursos poderosos, capacitando você a alcançar seus objetivos.",
+		"Plataforma com IA para WhatsApp que oferece disparo com segurança e escala, relatórios de mensagens detalhados e suporte especializado para agências de marketing.",
 	features: [
 		{
-			icon: <ChartPie size={32} />,
-			iconBoxColor: "bg-blue-600",
-			title: "Análise Avançada",
-			desc: "Experimente capacidades de análise avançadas que permitem mergulhar fundo nos dados, descobrir padrões significativos e derivar insights acionáveis",
-			imgSrc: feature1,
+			icon: "🚀",
+			title: "Disparos com Segurança e Escala",
+			text: "Sistema anti-ban que protege suas contas WhatsApp enquanto permite disparos em massa com alta taxa de entrega.",
 		},
 		{
-			icon: <Files size={32} />,
-			iconBoxColor: "bg-cyan-500",
-			title: "Relatórios Automatizados",
-			desc: "Economize tempo e esforço com relatórios automatizados, gerando relatórios abrangentes e precisos automaticamente, simplificando sua análise de dados",
-			imgSrc: feature2,
+			icon: "📊",
+			title: "Relatórios e Métricas Reais",
+			text: "Acompanhe suas campanhas com relatórios detalhados de mensagens WhatsApp e métricas de conversão em tempo real.",
 		},
 		{
-			icon: <UserRoundPen size={32} />,
-			iconBoxColor: "bg-yellow-500",
-			title: "Relatório de Retenção",
-			desc: "Melhore a retenção com nosso relatório, maximizando o engajamento e a lealdade do cliente para o negócio",
+			icon: "🤖",
+			title: "Ferramenta com IA para WhatsApp",
+			text: "Inteligência artificial avançada para segmentação inteligente e automação completa de suas campanhas.",
 		},
 		{
-			icon: <GitFork size={32} />,
-			iconBoxColor: "bg-red-500",
-			title: "Variantes de Teste A/B",
-			desc: "Compare eficientemente variantes de teste A/B para determinar as estratégias mais eficazes",
+			icon: "🛡️",
+			title: "Controle Total das Campanhas",
+			text: "Tenha controle absoluto sobre suas campanhas WhatsApp com nossa plataforma anti-ban e sistema de aquecimento.",
 		},
 		{
-			icon: <Blocks size={32} />,
-			iconBoxColor: "bg-purple-500",
-			title: "Diretório de Integração",
-			desc: "Integre-se perfeitamente com nosso diretório, maximizando a eficiência e desbloqueando todo o potencial",
+			icon: "📈",
+			title: "Aumento de Conversões via WhatsApp",
+			text: "Estratégias comprovadas para aumentar suas vendas automáticas no WhatsApp e melhorar sua taxa de conversão.",
+		},
+		{
+			icon: "🎯",
+			title: "WhatsApp Marketing para Agências",
+			text: "Solução completa para agências com suporte e onboarding especializado, ideal para gerenciar múltiplos clientes.",
 		},
 	],
 };
@@ -306,7 +304,7 @@ export const blogData = {
 
 // Cta
 export const ctaData = {
-	text: "Comece a rastrear suas análises de usuário para impulsionar seu negócio",
+	text: "Comece a aumentar suas conversões via WhatsApp com nossa plataforma anti-ban e automação completa",
 };
 
 // Footer

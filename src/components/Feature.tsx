@@ -53,48 +53,48 @@ const Features = () => {
 
 	const features = [
 		{
-			icon: FaRobot,
-			title: "Simulação Realista",
+			icon: FaWhatsapp,
+			title: "Disparos com Segurança e Escala",
 			description:
-				"Interações naturais que simulam perfeitamente o comportamento humano.",
-			color: "from-blue-400 to-indigo-600",
+				"Sistema anti-ban que protege suas contas WhatsApp enquanto permite disparos em massa com alta taxa de entrega.",
+			color: "from-green-400 to-emerald-600",
 			delay: 0.2,
 		},
 		{
-			icon: FaWhatsapp,
-			title: "Sistema de Aquecimento",
+			icon: FaChartLine,
+			title: "Relatórios e Métricas Reais",
 			description:
-				"Evite banimentos com nosso sistema inteligente de aquecimento de números WhatsApp.",
-			color: "from-green-400 to-emerald-600",
+				"Acompanhe suas campanhas com relatórios detalhados de mensagens WhatsApp e métricas de conversão em tempo real.",
+			color: "from-purple-400 to-purple-600",
 			delay: 0.4,
 		},
 		{
-			icon: FaChartLine,
-			title: "Análise em Tempo Real",
+			icon: FaRobot,
+			title: "Ferramenta com IA para WhatsApp",
 			description:
-				"Métricas detalhadas e insights valiosos sobre suas campanhas.",
-			color: "from-purple-400 to-purple-600",
+				"Inteligência artificial avançada para segmentação inteligente e automação completa de suas campanhas.",
+			color: "from-blue-400 to-indigo-600",
 			delay: 0.6,
 		},
 		{
 			icon: FaShieldAlt,
-			title: "Proteção Antibanimento",
+			title: "Plataforma Anti-Ban WhatsApp",
 			description:
-				"Sistema inteligente que protege suas contas contra bloqueios.",
+				"Controle total das campanhas com sistema de proteção que reduz bloqueios de contas WhatsApp.",
 			color: "from-red-400 to-rose-600",
 			delay: 0.8,
 		},
 		{
 			icon: FaDatabase,
-			title: "Gestão de Dados",
-			description: "Organize e segmente seus contatos de forma eficiente.",
+			title: "Automação Completa para E-commerces",
+			description: "Vendas automáticas no WhatsApp com segmentação inteligente e gestão eficiente de leads.",
 			color: "from-amber-400 to-orange-600",
 			delay: 1.0,
 		},
 		{
 			icon: FaUserFriends,
-			title: "Multi-Contas",
-			description: "Gerencie múltiplas contas em uma única interface.",
+			title: "WhatsApp Marketing para Agências",
+			description: "Suporte e onboarding especializado para agências que gerenciam múltiplos clientes.",
 			color: "from-cyan-400 to-teal-600",
 			delay: 1.2,
 		},
@@ -138,19 +138,19 @@ const Features = () => {
 						transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY }}
 					>
 						<h2 className="text-5xl md:text-6xl font-bold mb-6">
-							<span className="bg-gradient-to-r from-white via-primary/80 to-white text-transparent bg-clip-text">
-								Recursos Poderosos
-							</span>
-						</h2>
-					</motion.div>
-					<motion.p
-						initial={{ opacity: 0 }}
-						animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-						transition={{ delay: 0.5 }}
-						className="text-xl text-gray-400 max-w-3xl mx-auto"
-					>
-						Tudo que você precisa para automatizar e escalar suas campanhas
-					</motion.p>
+						<span className="bg-gradient-to-r from-white via-primary/80 to-white text-transparent bg-clip-text">
+							WhatsApp Marketing Avançado
+						</span>
+					</h2>
+				</motion.div>
+				<motion.p
+					initial={{ opacity: 0 }}
+					animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+					transition={{ delay: 0.5 }}
+					className="text-xl text-gray-400 max-w-3xl mx-auto"
+				>
+					Aumente conversões via WhatsApp com nossa plataforma anti-ban e automação completa para e-commerces
+				</motion.p>
 				</motion.div>
 
 				{/* Features Grid */}

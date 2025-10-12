@@ -43,10 +43,10 @@ export const StickyCallToAction: React.FC<StickyCallToActionProps> = ({
 
   // Ofertas rotativas para aumentar conversão
   const offers = [
-    { icon: "🔥", text: "Últimas 24h: 70% OFF", highlight: "OFERTA LIMITADA" },
-    { icon: "⚡", text: "Aumente vendas em 300%", highlight: "RESULTADO COMPROVADO" },
-    { icon: "🎯", text: "Setup em apenas 5 minutos", highlight: "SUPER FÁCIL" },
-    { icon: "💰", text: "ROI de 500% garantido", highlight: "GARANTIA TOTAL" }
+    { icon: "🔥", text: "Plataforma Anti-Ban WhatsApp", highlight: "SEM BLOQUEIOS" },
+    { icon: "⚡", text: "Aumente conversões via WhatsApp", highlight: "RESULTADOS REAIS" },
+    { icon: "🎯", text: "Relatórios e métricas em tempo real", highlight: "CONTROLE TOTAL" },
+    { icon: "💰", text: "IA para WhatsApp automático", highlight: "TECNOLOGIA AVANÇADA" }
   ];
 
   // Track scroll position to show/hide sticky CTA
