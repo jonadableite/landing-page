@@ -31,6 +31,7 @@ import Legal from "./components/Legal";
 import Pricing from "./components/Pricing";
 import Privacy from "./components/Privacidade";
 import Register from "./components/Register";
+import Reembolso from "./components/Reembolso";
 import Security from "./components/Seguranca";
 import Terms from "./components/Termos";
 import Testimonials from "./components/Testimonials";
@@ -114,6 +115,7 @@ const App: React.FC = () => {
 							<Route path="/legal" element={<Legal />} />
 							<Route path="/privacy" element={<Privacy />} />
 							<Route path="/terms" element={<Terms />} />
+							<Route path="/reembolso" element={<Reembolso />} />
 							<Route path="/security" element={<Security />} />
 							<Route path="/compliance" element={<Compliance />} />
 							<Route path="/trial-form" element={<TestGratuitoForm />} />

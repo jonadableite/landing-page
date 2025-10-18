@@ -90,6 +90,7 @@ export default function Footer() {
 			links: [
 				{ name: "Privacidade", path: "/privacy" },
 				{ name: "Termos", path: "/terms" },
+				{ name: "Reembolso", path: "/reembolso" },
 				{ name: "Segurança", path: "/security" },
 				{ name: "Compliance", path: "/compliance" },
 				{ name: "Licenças", path: "/legal" },
@@ -220,7 +221,7 @@ export default function Footer() {
 											<motion.span
 												animate={
 													hoveredLink ===
-													(typeof link === "string" ? link : link.name)
+														(typeof link === "string" ? link : link.name)
 														? { x: 10 }
 														: { x: 0 }
 												}
@@ -232,7 +233,7 @@ export default function Footer() {
 												animate={{
 													scaleX:
 														hoveredLink ===
-														(typeof link === "string" ? link : link.name)
+															(typeof link === "string" ? link : link.name)
 															? 1
 															: 0,
 												}}

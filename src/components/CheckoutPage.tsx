@@ -16,6 +16,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { stripePromise } from "../lib/stripe-client";
 import { CheckoutForm } from "./CheckoutForm";
+import RefundPolicyLink from "./RefundPolicyLink";
 
 const containerVariants = {
 	hidden: { opacity: 0 },
@@ -378,6 +379,42 @@ const CheckoutPage: React.FC = () => {
 										price={price || 0}
 									/>
 								</Elements>
+							</motion.div>
+
+							{/* Footer Legal Links */}
+							<motion.div
+								variants={cardVariants}
+								className="text-center mt-8 space-y-3 pb-8"
+							>
+								<p className="text-sm text-white/60">
+									Ao continuar, você concorda com nossos{' '}
+									<a
+										href="/terms"
+										className="text-blue-400 hover:text-blue-300 hover:underline transition-colors"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Termos de Serviço
+									</a>
+									{' e '}
+									<a
+										href="/privacy"
+										className="text-blue-400 hover:text-blue-300 hover:underline transition-colors"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Política de Privacidade
+									</a>
+								</p>
+								<div className="flex items-center justify-center gap-2">
+									<Lock className="w-4 h-4 text-green-400" />
+									<span className="text-xs text-white/50">
+										Pagamento seguro e criptografado
+									</span>
+								</div>
+								<div className="pt-2">
+									<RefundPolicyLink variant="footer" />
+								</div>
 							</motion.div>
 						</motion.div>
 					) : (
