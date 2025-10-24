@@ -38,7 +38,7 @@ export default function PricingPage() {
       position: 'pricing_section',
       ...utmParams,
     });
-    
+
     console.log("Redirecionando para o checkout da Hotmart:", checkoutUrl);
     window.location.href = checkoutUrl;
   };
@@ -65,8 +65,8 @@ export default function PricingPage() {
         "Relatórios de mensagens básicos",
         "Sistema de aquecimento básico",
       ],
-      checkoutUrlMonthly: "https://pay.hotmart.com/K99734443S?off=6dzaxpbx&checkoutMode=10",
-      checkoutUrlYearly: "https://pay.hotmart.com/K99734443S?off=496h6ukc&checkoutMode=6",
+      checkoutUrlMonthly: "https://pay.hotmart.com/H102591297Q?checkoutMode=10&bid=1761343946328",
+      checkoutUrlYearly: "https://pay.hotmart.com/P102592964W",
     },
     {
       name: "Pro WhatsApp",
