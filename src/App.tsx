@@ -41,6 +41,7 @@ import UpsellPage from "./components/UpsellPage";
 // Novos componentes otimizados
 import StickyCallToAction from "./components/StickyCallToAction";
 import ExitIntentModal from "./components/ExitIntentModal";
+import WhatsAppFloatingButton from "./components/WhatsAppFloatingButton";
 
 // Following Pointer
 import { FollowerPointerCard } from "@/components/ui/following-pointer";
@@ -140,6 +141,10 @@ const App: React.FC = () => {
 						<>
 							<StickyCallToAction />
 							<ExitIntentModal />
+							<WhatsAppFloatingButton 
+								phoneNumber="whatleads"
+								message="Olá! Gostaria de saber mais sobre o WhatLeads e como ele pode revolucionar minha estratégia de marketing no WhatsApp."
+							/>
 						</>
 					)}
 				</div>
